@@ -10,7 +10,7 @@ const DECREASE = 'counter/DECREASE';
 export const increase = () => ({ type: INCREASE });
 export const decrease = () => ({ type: DECREASE });
 
-// state 초기화
+// 초기 상태 선언
 const initailState = {
   number: 0,
 };
