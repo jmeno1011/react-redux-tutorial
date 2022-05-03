@@ -27,3 +27,20 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
+
+// connect 내부에 익명 함수 형태로 선언하는 방식
+// export default connect(
+//   // mapStateToProps부분
+//   (state) => ({
+//     number: state.counter.number,
+//   }),
+//   // mapDispatchToProps부분
+//   (dispatch) => ({
+//     increase: () => {
+//       dispatch(increase());
+//     },
+//     decrease: () => {
+//       dispatch(decrease());
+//     },
+//   }),
+// )(CounterContainer);
