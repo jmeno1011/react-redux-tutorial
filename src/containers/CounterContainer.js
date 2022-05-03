@@ -27,7 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
+// 정석적인 방법인 느낌
+// export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
 
 // connect 내부에 익명 함수 형태로 선언하는 방식
 // version 1.0
@@ -64,3 +65,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
 //       dispatch,
 //     ),
 // )(CounterContainer);
+
+// version 3.0
+// 제일 간단해보임
+export default connect(
+  // mapStateToProps부분
+  (state) => ({
+    number: state.counter.number,
+  }),
+  // mapDispatchToProps부분
+  {
+    increase,
+    decrease,
+  },
+)(CounterContainer);
