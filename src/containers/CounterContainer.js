@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease } from '../modules/counter';
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
 
 // connect 내부에 익명 함수 형태로 선언하는 방식
+// version 1.0
 // export default connect(
 //   // mapStateToProps부분
 //   (state) => ({
@@ -43,4 +45,22 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
 //       dispatch(decrease());
 //     },
 //   }),
+// )(CounterContainer);
+
+// version 1.0의 코드를 bindActionCreators를 이용해 좀더 간단히 선언할 수 있음
+// version 2.0
+// export default connect(
+//   // mapStateToProps부분
+//   (state) => ({
+//     number: state.counter.number,
+//   }),
+//   // mapDispatchToProps부분
+//   (dispatch) =>
+//     bindActionCreators(
+//       {
+//         increase,
+//         decrease,
+//       },
+//       dispatch,
+//     ),
 // )(CounterContainer);
