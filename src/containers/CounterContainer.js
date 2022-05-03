@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
+import { increase, decrease } from '../modules/counter';
 
 // 컨테이너 컴포넌트 : 리덕스 스토어와 연동된 컴포넌트를 컨테이너 컴포넌트라고 한다.
 const CounterContainer = ({ number, increase, decrease }) => {
@@ -16,10 +17,12 @@ const mapStateToProps = (state) => ({
 // mapDispatchToProps는 액션 생성 함수를 컴포넌트의 props로 넘겨주기 위한 함수
 const mapDispatchToProps = (dispatch) => ({
   increase: () => {
-    console.log('increase');
+    dispatch(increase());
+    // console.log('increase');
   },
   decrease: () => {
-    console.log('decrease');
+    dispatch(decrease());
+    // console.log('decrease');
   },
 });
 

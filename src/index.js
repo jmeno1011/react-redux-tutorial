@@ -7,7 +7,6 @@ import { createStore } from 'redux';
 import rootReducer from './modules';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
-// import { composeWithDevTools } from 'redux-devtools-extension';
 
 // 스토어 생성
 const store = createStore(rootReducer, composeWithDevTools());
