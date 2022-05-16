@@ -1,3 +1,4 @@
+import produce from 'immer';
 import { createAction, handleActions } from 'redux-actions';
 
 // input 값 변경
@@ -114,23 +115,49 @@ const initailState = {
 // );
 
 // action.payload => 모두 같은 이름이여서 헷갈릴 수가 있어서 비구조할당으로 각 명칭 정해주기로해서 위 코드를 아래와 같이 변경
+// const todos = handleActions(
+//   {
+//     [CHANGE_INPUT]: (state, {payload : input}) => ({ ...state, input }),
+//     [INSERT]: (state, {payload : todo}) => ({
+//       ...state,
+//       todos: state.todos.concat(todo),
+//     }),
+//     [TOGGLE]: (state, {payload : id}) => ({
+//       ...state,
+//       todos: state.todos.map((todo) =>
+//         todo.id === id ? { ...todo, done: !todo.done } : todo,
+//       ),
+//     }),
+//     [REMOVE]: (state, {payload : id}) => ({
+//       ...state,
+//       todos: state.todos.filter((todo) => todo.id !== id),
+//     }),
+//   },
+//   initailState,
+// );
+
+// immer 적용해보기
 const todos = handleActions(
   {
-    [CHANGE_INPUT]: (state, {payload : input}) => ({ ...state, input }),
-    [INSERT]: (state, {payload : todo}) => ({
-      ...state,
-      todos: state.todos.concat(todo),
+    [CHANGE_INPUT]: (state, {payload : input}) => 
+    produce(state, draft=>{
+      draft.input = input;
     }),
-    [TOGGLE]: (state, {payload : id}) => ({
-      ...state,
-      todos: state.todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo,
-      ),
+    [INSERT]: (state,{payload: todo})=>
+    produce(state, draft=>{
+      draft.todos.push(todo)
     }),
-    [REMOVE]: (state, {payload : id}) => ({
-      ...state,
-      todos: state.todos.filter((todo) => todo.id !== id),
+    [TOGGLE]: (state, {payload : id}) =>
+    produce(state, draft=>{
+      const todo = draft.todos.find(todo=>todo.id === id);
+      todo.done = !todo.done;
     }),
+    [REMOVE]: (state, {payload : id}) => 
+    produce(state, draft=>{
+      const index = draft.todos.findIndex(todo=>todo.id===id);
+      draft.todos.splice(index, 1);
+    })
+    ,
   },
   initailState,
 );
