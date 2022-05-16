@@ -14,6 +14,7 @@ const CounterContainer = () => {
   const onDecrease = useCallback(()=>dispatch(decrease()),[dispatch])
   return (
     // <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    // <Counter number={number} onIncrease={()=>dispatch(increase())} onDecrease={()=>dispatch(decrease())} />
     <Counter number={number} onIncrease={onIncrease} onDecrease={onDecrease} />
   );
 };
