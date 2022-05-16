@@ -6,7 +6,7 @@ import TodosContainer from './containers/TodosContainer';
 
 function App() {
   return (
-    <div>
+    <div style={{padding:'32px'}}>
       {/* <Counter number={0} /> */}
       <CounterContainer />
       <hr />
