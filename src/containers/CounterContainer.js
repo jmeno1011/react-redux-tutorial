@@ -1,12 +1,15 @@
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease } from '../modules/counter';
 
 // 컨테이너 컴포넌트 : 리덕스 스토어와 연동된 컴포넌트를 컨테이너 컴포넌트라고 한다.
-const CounterContainer = ({ number, increase, decrease }) => {
+// const CounterContainer = ({ number, increase, decrease }) => {
+const CounterContainer = () => {
+  const number = useSelector(state=>state.counter.number)
   return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    // <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    <Counter number={number} />
   );
 };
 
@@ -68,14 +71,17 @@ const mapDispatchToProps = (dispatch) => ({
 
 // version 3.0
 // 제일 간단해보임
-export default connect(
-  // mapStateToProps부분
-  (state) => ({
-    number: state.counter.number,
-  }),
-  // mapDispatchToProps부분
-  {
-    increase,
-    decrease,
-  },
-)(CounterContainer);
+// export default connect(
+//   // mapStateToProps부분
+//   (state) => ({
+//     number: state.counter.number,
+//   }),
+//   // mapDispatchToProps부분
+//   {
+//     increase,
+//     decrease,
+//   },
+// )(CounterContainer);
+
+// useSelector의 사용으로 connect를 안쓰게됨
+export default CounterContainer;
