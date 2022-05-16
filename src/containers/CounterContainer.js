@@ -1,15 +1,16 @@
 import { bindActionCreators } from 'redux';
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease } from '../modules/counter';
 
 // 컨테이너 컴포넌트 : 리덕스 스토어와 연동된 컴포넌트를 컨테이너 컴포넌트라고 한다.
 // const CounterContainer = ({ number, increase, decrease }) => {
 const CounterContainer = () => {
-  const number = useSelector(state=>state.counter.number)
+  const number = useSelector(state=>state.counter.number);
+  const dispatch = useDispatch();
   return (
     // <Counter number={number} onIncrease={increase} onDecrease={decrease} />
-    <Counter number={number} />
+    <Counter number={number} onIncrease={()=>dispatch(increase())} onDecrease={()=>dispatch(decrease())} />
   );
 };
 
